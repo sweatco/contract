@@ -1,22 +1,16 @@
 use model::ContractNameInterface;
 use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
-    near_bindgen, PanicOnDefault,
+    near_bindgen,
+    serde::Serialize,
+    PanicOnDefault,
 };
 
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, PanicOnDefault)]
+#[serde(crate = "near_sdk::serde")]
 pub struct Contract {
     pub name: String,
-}
-
-#[near_bindgen]
-impl Contract {
-    // pub fn init() -> Self {
-    //     Self {
-    //         name: "Alice".to_string(),
-    //     }
-    // }
 }
 
 #[near_bindgen]
@@ -24,20 +18,22 @@ impl ContractNameInterface for Contract {
     #[init]
     #[must_use]
     fn init() -> Self {
-        todo!()
+        Self {
+            name: "Default name".to_string(),
+        }
     }
 
     #[init]
     #[must_use]
     fn init_with_name(name: String) -> Self {
-        todo!()
-    }
-
-    fn return_none(&mut self) {
-        todo!()
+        Self { name }
     }
 
     fn get_name(&self) -> String {
         self.name.clone()
+    }
+
+    fn set_name(&mut self, name: String) {
+        self.name = name
     }
 }

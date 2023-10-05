@@ -10,6 +10,6 @@ pub trait ContractNameInterface {
     where
         Self: Sized;
 
-    fn return_none(&mut self);
     fn get_name(&self) -> String;
+    fn set_name(&mut self, name: String);
 }

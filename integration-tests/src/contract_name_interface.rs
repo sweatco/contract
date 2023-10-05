@@ -1,5 +1,6 @@
 use async_trait::async_trait;
 use model::ContractNameInterfaceIntegration;
+use serde_json::json;
 use workspaces::Contract;
 
 pub struct ContractName {
@@ -12,35 +13,64 @@ impl ContractNameInterfaceIntegration for ContractName {
     where
         Self: Sized,
     {
-        todo!()
+        println!("▶️ Init contract");
+
+        self.contract
+            .call("init")
+            .max_gas()
+            .transact()
+            .await?
+            .into_result()?;
+
+        Ok(())
     }
 
     async fn init_with_name(&self, name: String) -> anyhow::Result<()>
     where
         Self: Sized,
     {
-        todo!()
-    }
+        println!("▶️ Init contract with name");
 
-    async fn return_none(&mut self) -> anyhow::Result<()> {
-        todo!()
+        self.contract
+            .call("init_with_name")
+            .args_json(json!({
+                "name": name,
+            }))
+            .max_gas()
+            .transact()
+            .await?
+            .into_result()?;
+
+        Ok(())
     }
 
     async fn get_name(&self) -> anyhow::Result<String> {
-        todo!()
+        println!("▶️ Init contract with name");
+
+        let result = self
+            .contract
+            .call("get_name")
+            .max_gas()
+            .transact()
+            .await?
+            .into_result()?;
+
+        Ok(result.json()?)
     }
-    // async fn init(&self) -> anyhow::Result<()> {
-    //     println!("▶️ Init ft contract");
-    //
-    //     self.call("new")
-    //         .args_json(json!({
-    //             "postfix": ".u.sweat.testnet",
-    //         }))
-    //         .max_gas()
-    //         .transact()
-    //         .await?
-    //         .into_result()?;
-    //
-    //     Ok(())
-    // }
+
+    async fn set_name(&mut self, name: String) -> anyhow::Result<()> {
+        println!("▶️ Init contract with name");
+
+        self.contract
+            .call("set_name")
+            .args_json(json!({
+                "name": name,
+            }))
+            .max_gas()
+            .transact()
+            .await?
+            .into_result()?;
+
+        Ok(())
+    }
 }
