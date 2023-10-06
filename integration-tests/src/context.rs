@@ -1,9 +1,9 @@
 use std::{collections::HashMap, env, fs};
 
+use integration_utils::build::build_contract;
 use near_units::parse_near;
 use workspaces::{network::Sandbox, Account, Worker};
 
-use crate::common::build_contract;
 use crate::contract_name_interface::ContractName;
 
 pub const EPOCH_BLOCKS_HEIGHT: u64 = 43_200;
@@ -26,9 +26,7 @@ impl Context {
         let worker = workspaces::sandbox().await?;
         let root_account = worker.dev_create_account().await?;
 
-        let contract = worker
-            .dev_deploy(&Self::load_wasm("../res/contract_name.wasm"))
-            .await?;
+        let contract = worker.dev_deploy(&Self::load_wasm("../res/contract_name.wasm")).await?;
 
         println!("@@ contract deployed to {}", contract.id());
 
@@ -58,8 +56,7 @@ impl Context {
 
     fn load_wasm(wasm_path: &str) -> Vec<u8> {
         let current_dir = env::current_dir().expect("Failed to get current dir");
-        let wasm_filepath =
-            fs::canonicalize(current_dir.join(wasm_path)).expect("Failed to get wasm file path");
+        let wasm_filepath = fs::canonicalize(current_dir.join(wasm_path)).expect("Failed to get wasm file path");
         fs::read(wasm_filepath).expect("Failed to load wasm")
     }
 

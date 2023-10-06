@@ -12,9 +12,9 @@ fake = { workspace = true }
 rand = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }
-ed25519-dalek = { workspace = true }
 
 model = { workspace = true }
+integration-utils = { workspace = true }
 
 anyhow = "1.0"
 near-units = "0.2.0"
