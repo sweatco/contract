@@ -11,4 +11,3 @@ name = "model"
 anyhow = { workspace = true }
 async-trait = { workspace = true }
 proc-macros = { workspace = true }
-near-sdk = { workspace = true }

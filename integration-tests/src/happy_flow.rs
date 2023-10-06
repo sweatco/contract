@@ -1,8 +1,7 @@
-use model::ContractNameInterfaceIntegration;
-
 #[tokio::test]
 async fn happy_flow() -> anyhow::Result<()> {
     use crate::common::{prepare_contract, Prepared};
+    use model::ContractNameInterfaceIntegration;
 
     println!("👷🏽 Run happy flow test");
 

@@ -15,12 +15,7 @@ impl ContractNameInterfaceIntegration for ContractName {
     {
         println!("▶️ Init contract");
 
-        self.contract
-            .call("init")
-            .max_gas()
-            .transact()
-            .await?
-            .into_result()?;
+        self.contract.call("init").max_gas().transact().await?.into_result()?;
 
         Ok(())
     }
