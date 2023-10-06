@@ -13,11 +13,11 @@ async fn happy_flow() -> anyhow::Result<()> {
         fee_account: _,
     } = prepare_contract().await?;
 
-    assert_eq!(context.contract.get_name().await?, "Default name");
+    assert_eq!(context.contract.receive_name().await?, "Default name");
 
     context.contract.set_name("New name".to_string()).await?;
 
-    assert_eq!(context.contract.get_name().await?, "New name");
+    assert_eq!(context.contract.receive_name().await?, "New name");
 
     Ok(())
 }

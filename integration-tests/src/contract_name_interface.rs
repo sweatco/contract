@@ -25,7 +25,7 @@ impl ContractNameInterfaceIntegration for ContractName {
         Ok(())
     }
 
-    async fn init_with_name(&self, name: String) -> anyhow::Result<()>
+    async fn initialize_with_name(&self, name: String) -> anyhow::Result<()>
     where
         Self: Sized,
     {
@@ -44,12 +44,12 @@ impl ContractNameInterfaceIntegration for ContractName {
         Ok(())
     }
 
-    async fn get_name(&self) -> anyhow::Result<String> {
+    async fn receive_name(&self) -> anyhow::Result<String> {
         println!("▶️ Init contract with name");
 
         let result = self
             .contract
-            .call("get_name")
+            .call("receive_name")
             .max_gas()
             .transact()
             .await?

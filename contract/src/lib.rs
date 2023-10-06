@@ -25,11 +25,11 @@ impl ContractNameInterface for Contract {
 
     #[init]
     #[must_use]
-    fn init_with_name(name: String) -> Self {
+    fn initialize_with_name(name: String) -> Self {
         Self { name }
     }
 
-    fn get_name(&self) -> String {
+    fn receive_name(&self) -> String {
         self.name.clone()
     }
 
