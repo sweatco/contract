@@ -1,4 +1,4 @@
-use proc_macros::make_integration_version;
+use integration_trait::make_integration_version;
 
 #[make_integration_version]
 pub trait ContractNameInterface {

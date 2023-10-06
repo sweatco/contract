@@ -3,22 +3,18 @@ where
     One: Copy,
     Two: Copy,
 {
-    one.into_iter()
+    one.iter()
         .flat_map(|&item1| two.iter().map(move |&item2| (item1, item2)))
         .collect()
 }
 
-pub fn generate_permutations_3<One, Two, Three>(
-    one: &[One],
-    two: &[Two],
-    three: &[Three],
-) -> Vec<(One, Two, Three)>
+pub fn generate_permutations_3<One, Two, Three>(one: &[One], two: &[Two], three: &[Three]) -> Vec<(One, Two, Three)>
 where
     One: Copy,
     Two: Copy,
     Three: Copy,
 {
-    one.into_iter()
+    one.iter()
         .flat_map(|&item1| {
             two.iter()
                 .flat_map(move |&item2| three.iter().map(move |&item3| (item1, item2, item3)))

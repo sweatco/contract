@@ -1,11 +1,12 @@
-use ed25519_dalek::{SigningKey, VerifyingKey};
-use model::ContractNameInterfaceIntegration;
-use rand::rngs::OsRng;
-use serde_json::Value;
 use std::{
     process::{Command, Stdio},
     sync::atomic::{AtomicBool, Ordering},
 };
+
+use ed25519_dalek::{SigningKey, VerifyingKey};
+use model::ContractNameInterfaceIntegration;
+use rand::rngs::OsRng;
+use serde_json::Value;
 use workspaces::Account;
 
 use crate::context::Context;
@@ -30,11 +31,7 @@ impl ValueGetters for Value {
     }
 
     fn get_interest(&self) -> u128 {
-        self.as_object()
-            .unwrap()
-            .get("amount")
-            .unwrap()
-            .get_u128("total")
+        self.as_object().unwrap().get("amount").unwrap().get_u128("total")
     }
 
     fn get_jar_id(&self) -> String {
@@ -92,6 +89,7 @@ pub async fn prepare_contract() -> anyhow::Result<Prepared> {
     })
 }
 
+#[must_use]
 pub fn generate_keypair() -> (SigningKey, VerifyingKey) {
     let mut csprng = OsRng;
     let signing_key: SigningKey = SigningKey::generate(&mut csprng);

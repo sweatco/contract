@@ -22,10 +22,7 @@ where
         .map(|inp| redundant_command_measure(move || command(*inp)))
         .collect_vec();
 
-    let res: Vec<_> = join_all(all)
-        .await
-        .into_iter()
-        .collect::<anyhow::Result<_>>()?;
+    let res: Vec<_> = join_all(all).await.into_iter().collect::<anyhow::Result<_>>()?;
 
     let res = inputs.into_iter().zip(res.into_iter()).collect_vec();
 
@@ -38,7 +35,7 @@ async fn redundant_command_measure<Fut>(mut command: impl FnMut() -> Fut) -> any
 where
     Fut: Future<Output = anyhow::Result<Gas>> + Send + 'static,
 {
-    let futures = (0..1).into_iter().map(|_| spawn(command())).collect_vec();
+    let futures = (0..1).map(|_| spawn(command())).collect_vec();
 
     let all_gas: Vec<Gas> = join_all(futures)
         .await

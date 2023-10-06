@@ -34,6 +34,6 @@ impl ContractNameInterface for Contract {
     }
 
     fn set_name(&mut self, name: String) {
-        self.name = name
+        self.name = name;
     }
 }

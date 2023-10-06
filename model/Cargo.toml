@@ -10,4 +10,4 @@ name = "model"
 [dependencies]
 anyhow = { workspace = true }
 async-trait = { workspace = true }
-proc-macros = { workspace = true }
+integration-trait = { workspace = true }

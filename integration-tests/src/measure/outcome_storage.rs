@@ -34,7 +34,7 @@ impl OutcomeStorage {
 
     pub fn start_measuring(account: &Account) {
         let mut measuring = Self::get_measuring();
-        assert!(measuring.iter().find(|a| a == &account.id().as_str()).is_none());
+        assert!(!measuring.iter().any(|a| a == account.id().as_str()));
         measuring.push(account.id().to_string());
     }
 
@@ -58,7 +58,7 @@ impl OutcomeStorage {
         let output = future.await?;
         Self::stop_measuring(account);
 
-        Ok((OutcomeStorage::get_total_gas(&account), output))
+        Ok((OutcomeStorage::get_total_gas(account), output))
     }
 
     /// Execute command and measure one of its operations gas price
@@ -71,7 +71,7 @@ impl OutcomeStorage {
         let output = future.await?;
         Self::stop_measuring(account);
 
-        let result = OutcomeStorage::get_labeled_result(&account, label);
+        let result = OutcomeStorage::get_labeled_result(account, label);
 
         Ok((result.gas_burnt, output))
     }
@@ -104,7 +104,7 @@ impl OutcomeStorage {
             .unwrap()
             .outcomes()
             .into_iter()
-            .find(|outcome| outcome.logs.iter().find(|log| log.contains(label)).is_some())
+            .find(|outcome| outcome.logs.iter().any(|log| log.contains(label)))
             .unwrap()
             .clone()
     }

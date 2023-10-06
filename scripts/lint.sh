@@ -11,5 +11,8 @@ cargo clippy --all \
   \
   -A clippy::module_name_repetitions \
   -A clippy::needless-pass-by-value \
+  -A clippy::missing-errors-doc \
+  -A clippy::module-inception \
+  -A clippy::missing-panics-doc \
   \
   -D warnings
