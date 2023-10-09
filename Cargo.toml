@@ -17,5 +17,5 @@ base64 = "0.21.3"
 sha256 = "1.3.0"
 
 integration-trait = { git = "https://github.com/sweatco/integration-trait.git", rev = "2f6fe3ec58f48090c6191364e6843dab526dd309" }
-integration-utils = { git = "https://github.com/sweatco/integration-utils.git", rev = "2b730e98c5e5cc3579786fe3a2cbd1866c5fd42e" }
+integration-utils = { git = "https://github.com/sweatco/integration-utils.git", rev = "783b0f0b524665db51db29680d3bbec9d42a40e4" }
 model = { path = "model" }

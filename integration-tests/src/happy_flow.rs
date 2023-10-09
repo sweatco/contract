@@ -1,22 +1,18 @@
 #[tokio::test]
 async fn happy_flow() -> anyhow::Result<()> {
-    use crate::common::{prepare_contract, Prepared};
     use model::ContractNameInterfaceIntegration;
+
+    use crate::prepare::{prepare_contract, IntegrationContracts};
 
     println!("👷🏽 Run happy flow test");
 
-    let Prepared {
-        mut context,
-        manager: _,
-        alice: _,
-        fee_account: _,
-    } = prepare_contract().await?;
+    let context = prepare_contract().await?;
 
-    assert_eq!(context.contract.receive_name().await?, "Default name");
+    assert_eq!(context.contract_name().receive_name().await?, "Default name");
 
-    context.contract.set_name("New name".to_string()).await?;
+    context.contract_name().set_name("New name".to_string()).await?;
 
-    assert_eq!(context.contract.receive_name().await?, "New name");
+    assert_eq!(context.contract_name().receive_name().await?, "New name");
 
     Ok(())
 }

@@ -16,6 +16,9 @@ itertools = { workspace = true }
 model = { workspace = true }
 integration-utils = { workspace = true }
 
+
+dotenv = "0.15.0"
+
 anyhow = "1.0"
 near-units = "0.2.0"
 # arbitrary_precision enabled for u128 types that workspaces requires for Balance types

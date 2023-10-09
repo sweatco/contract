@@ -3,12 +3,12 @@ use model::ContractNameInterfaceIntegration;
 use serde_json::json;
 use workspaces::Contract;
 
-pub struct ContractName {
-    pub contract: Contract,
+pub struct ContractName<'a> {
+    pub contract: &'a Contract,
 }
 
 #[async_trait]
-impl ContractNameInterfaceIntegration for ContractName {
+impl ContractNameInterfaceIntegration for ContractName<'_> {
     async fn init(&self) -> anyhow::Result<()>
     where
         Self: Sized,
