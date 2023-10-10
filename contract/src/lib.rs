@@ -16,7 +16,6 @@ pub struct Contract {
 #[near_bindgen]
 impl ContractNameInterface for Contract {
     #[init]
-    #[must_use]
     fn init() -> Self {
         Self {
             name: "Default name".to_string(),
@@ -24,7 +23,6 @@ impl ContractNameInterface for Contract {
     }
 
     #[init]
-    #[must_use]
     fn initialize_with_name(name: String) -> Self {
         Self { name }
     }
