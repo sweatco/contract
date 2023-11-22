@@ -12,6 +12,9 @@ build: ##@Build Build the contract locally.
 build-in-docker: ##@Build Build reproducible artifact in Docker.
 	./scripts/build-in-docker.sh
 
+build-integration: ##@Build Build the contract for integration tests.
+	./scripts/build-integration.sh
+
 dock: build-in-docker ##@Build Shorthand for `build-in-docker`
 
 deploy: ##@Deploy Deploy the contract to dev account on Testnet.
@@ -21,7 +24,8 @@ cov: ##@Testing Run unit tests with coverage.
 	./scripts/coverage.sh
 
 test: ##@Testing Run unit tests.
-	./scripts/test.sh
+	cargo test --package model && \
+	cargo test --package contract_name
 
 integration: ##@Testing Run integration tests.
 	cargo test --package integration-tests

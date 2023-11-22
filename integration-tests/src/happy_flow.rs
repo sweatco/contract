@@ -2,7 +2,7 @@
 async fn happy_flow() -> anyhow::Result<()> {
     use model::ContractNameInterfaceIntegration;
 
-    use crate::prepare::{prepare_contract, IntegrationContracts};
+    use crate::context::{prepare_contract, IntegrationContext};
 
     println!("👷🏽 Run happy flow test");
 
